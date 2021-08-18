@@ -9,16 +9,13 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StatusBar, Text} from 'react-native';
+import { SafeAreaView, StatusBar, Text } from 'react-native';
 
-const App = () => {
-  return (
-    <SafeAreaView
-      style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <StatusBar barStyle={'light-content'} />
-      <Text style={{color: '#fff'}}>ByCoders Test</Text>
-    </SafeAreaView>
-  );
-};
+const App = () => (
+  <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <StatusBar barStyle="light-content" />
+    <Text style={{ color: '#fff' }}>ByCoders Test</Text>
+  </SafeAreaView>
+);
 
 export default App;
