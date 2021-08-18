@@ -17,7 +17,9 @@ export const Label = styled(Text).attrs({
   margin-left: ${largeSpacing}px;
   margin-bottom: ${minimumSpacing}px;
 `;
-export const Wrapper = styled.View``;
+export const Wrapper = styled.View`
+  margin: ${minimumSpacing * 1.2}px 0;
+`;
 export const Input = styled.TextInput`
   border-width: 2px;
   height: ${largeSpacing * 2}px;

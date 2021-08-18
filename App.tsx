@@ -39,6 +39,14 @@ const App: React.FC = () => (
         placeholder="Your e-mail"
         onChangeText={() => {}}
       />
+      <TextInput
+        isSecure
+        autoFocus
+        label="E-mail"
+        value=""
+        placeholder="Your e-mail"
+        onChangeText={() => {}}
+      />
       <Button styleText={{ weight: 'bold' }} onPress={() => {}}>
         Login
       </Button>
