@@ -66,6 +66,7 @@
   "baseUrl": ".",
   "paths": {
     "~/components": ["src/components"],
+    "~/themes": ["src/themes"],
   }
 
 }
