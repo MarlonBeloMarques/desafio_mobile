@@ -12,7 +12,7 @@ import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 import { colors, spacings, radius, typography } from '~/themes';
-import { Text } from './src/components';
+import { Text, TextInput } from './src/components';
 
 const theme: DefaultTheme = {
   ...colors,
@@ -26,12 +26,19 @@ const App: React.FC = () => (
     style={{
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
     }}
   >
     <ThemeProvider theme={theme}>
       <StatusBar barStyle="light-content" />
       <Text color="white">ByCoders Test</Text>
+      <TextInput
+        isSecure
+        autoFocus
+        label="E-mail"
+        value=""
+        placeholder="Your e-mail"
+        onChangeText={() => {}}
+      />
     </ThemeProvider>
   </SafeAreaView>
 );
