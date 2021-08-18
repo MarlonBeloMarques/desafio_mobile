@@ -9,18 +9,19 @@
  */
 
 import React from 'react';
-import { SafeAreaView, StatusBar, Text } from 'react-native';
-import { ThemeProvider } from 'styled-components';
+import { SafeAreaView, StatusBar } from 'react-native';
+import { DefaultTheme, ThemeProvider } from 'styled-components';
 import { colors, spacings, radius, typography } from '~/themes';
+import { Text } from './src/components';
 
-const theme = {
+const theme: DefaultTheme = {
   ...colors,
   ...spacings,
   ...radius,
   ...typography,
 };
 
-const App = () => (
+const App: React.FC = () => (
   <SafeAreaView
     style={{
       flex: 1,
@@ -30,7 +31,7 @@ const App = () => (
   >
     <ThemeProvider theme={theme}>
       <StatusBar barStyle="light-content" />
-      <Text style={{ color: '#fff' }}>ByCoders Test</Text>
+      <Text color="white">ByCoders Test</Text>
     </ThemeProvider>
   </SafeAreaView>
 );
