@@ -8,7 +8,8 @@
     "start": "npx react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx src/ --fix",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "**/*.ts?(x)": [
