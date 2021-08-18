@@ -23,7 +23,6 @@ const Typography: React.FC<Props> = ({
     style={{ fontSize: getTheme(variant).fontSize, lineHeight: getTheme(variant).lineHeight }}
     align={align}
     color={color}
-    variant={variant}
     weight={weight}
     {...rest}
   >

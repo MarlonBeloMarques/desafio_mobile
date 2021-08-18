@@ -9,10 +9,10 @@
  */
 
 import React from 'react';
-import { SafeAreaView, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 import { colors, spacings, radius, typography } from '~/themes';
-import { Button, Text, TextInput } from './src/components';
+import { Button, SceneWrapper, Text, TextInput } from './src/components';
 
 const theme: DefaultTheme = {
   ...colors,
@@ -22,17 +22,11 @@ const theme: DefaultTheme = {
 };
 
 const App: React.FC = () => (
-  <SafeAreaView
-    style={{
-      flex: 1,
-      justifyContent: 'center',
-    }}
-  >
+  <SceneWrapper style={{ flexGrow: 1, justifyContent: 'center' }}>
     <ThemeProvider theme={theme}>
       <StatusBar barStyle="light-content" />
       <Text color="white">ByCoders Test</Text>
       <TextInput
-        isSecure
         autoFocus
         label="E-mail"
         value=""
@@ -42,16 +36,16 @@ const App: React.FC = () => (
       <TextInput
         isSecure
         autoFocus
-        label="E-mail"
+        label="Password"
         value=""
-        placeholder="Your e-mail"
+        placeholder="Your password"
         onChangeText={() => {}}
       />
       <Button styleText={{ weight: 'bold' }} onPress={() => {}}>
         Login
       </Button>
     </ThemeProvider>
-  </SafeAreaView>
+  </SceneWrapper>
 );
 
 export default App;

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { colors, typography } from '../../themes';
+import { colors } from '../../themes';
 import getColors from '../../utils/helpers/getColors';
 
 export const fontWeight = {
@@ -10,7 +10,6 @@ export const fontWeight = {
 };
 
 interface Props {
-  variant: keyof typeof typography;
   color: keyof typeof colors;
   align: string;
   weight: keyof typeof fontWeight;
