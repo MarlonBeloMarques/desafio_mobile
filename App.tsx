@@ -12,7 +12,7 @@ import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 import { colors, spacings, radius, typography } from '~/themes';
-import { Text, TextInput } from './src/components';
+import { Button, Text, TextInput } from './src/components';
 
 const theme: DefaultTheme = {
   ...colors,
@@ -39,6 +39,9 @@ const App: React.FC = () => (
         placeholder="Your e-mail"
         onChangeText={() => {}}
       />
+      <Button styleText={{ weight: 'bold' }} onPress={() => {}}>
+        Login
+      </Button>
     </ThemeProvider>
   </SafeAreaView>
 );
