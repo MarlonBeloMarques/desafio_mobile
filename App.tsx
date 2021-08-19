@@ -8,11 +8,12 @@
  * @format
  */
 
+import { NavigationContainerRef } from '@react-navigation/core';
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 import { colors, spacings, radius, typography } from '~/themes';
-import { Button, SceneWrapper, Text, TextInput } from './src/components';
+import { Navigation, NavigationActions } from './src/navigation';
 
 const theme: DefaultTheme = {
   ...colors,
@@ -22,30 +23,18 @@ const theme: DefaultTheme = {
 };
 
 const App: React.FC = () => (
-  <SceneWrapper style={{ flexGrow: 1, justifyContent: 'center' }}>
+  <View style={{ flex: 1 }}>
     <ThemeProvider theme={theme}>
       <StatusBar barStyle="light-content" />
-      <Text color="white">ByCoders Test</Text>
-      <TextInput
-        autoFocus
-        label="E-mail"
-        value=""
-        placeholder="Your e-mail"
-        onChangeText={() => {}}
+      <Navigation
+        setNavigationTop={
+          (navigatorRef: NavigationContainerRef<any>) =>
+            NavigationActions.setTopLevelNavigator(navigatorRef)
+          // eslint-disable-next-line react/jsx-curly-newline
+        }
       />
-      <TextInput
-        isSecure
-        autoFocus
-        label="Password"
-        value=""
-        placeholder="Your password"
-        onChangeText={() => {}}
-      />
-      <Button styleText={{ weight: 'bold' }} onPress={() => {}}>
-        Login
-      </Button>
     </ThemeProvider>
-  </SceneWrapper>
+  </View>
 );
 
 export default App;
