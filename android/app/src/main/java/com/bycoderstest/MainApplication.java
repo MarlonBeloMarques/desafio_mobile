@@ -4,7 +4,14 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.facebook.react.shell.MainReactPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+import io.invertase.firebase.crashlytics.ReactNativeFirebaseCrashlyticsPackage;
 import io.realm.react.RealmReactPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -13,7 +20,9 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.List;
+import io.invertase.firebase.analytics.ReactNativeFirebaseAnalyticsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -30,7 +39,15 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-          return packages;
+          return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new SafeAreaContextPackage(),
+            new RNGestureHandlerPackage(),
+            new ReactNativeFirebaseAppPackage(),
+            new AsyncStoragePackage(),
+            new ReactNativeFirebaseAnalyticsPackage(),
+            new ReactNativeFirebaseCrashlyticsPackage()
+          );
         }
 
         @Override

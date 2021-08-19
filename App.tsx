@@ -9,9 +9,10 @@
  */
 
 import { NavigationContainerRef } from '@react-navigation/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar, View } from 'react-native';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
+import crashlytics from '@react-native-firebase/crashlytics';
 import { colors, spacings, radius, typography } from '~/themes';
 import { Navigation, NavigationActions } from './src/navigation';
 
@@ -22,19 +23,25 @@ const theme: DefaultTheme = {
   ...typography,
 };
 
-const App: React.FC = () => (
-  <View style={{ flex: 1 }}>
-    <ThemeProvider theme={theme}>
-      <StatusBar barStyle="light-content" />
-      <Navigation
-        setNavigationTop={
-          (navigatorRef: NavigationContainerRef<any>) =>
-            NavigationActions.setTopLevelNavigator(navigatorRef)
-          // eslint-disable-next-line react/jsx-curly-newline
-        }
-      />
-    </ThemeProvider>
-  </View>
-);
+const App: React.FC = () => {
+  useEffect(() => {
+    crashlytics().log('ByCodersTest Mounted.');
+  }, []);
+
+  return (
+    <View style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <StatusBar barStyle="light-content" />
+        <Navigation
+          setNavigationTop={
+            (navigatorRef: NavigationContainerRef<any>) =>
+              NavigationActions.setTopLevelNavigator(navigatorRef)
+            // eslint-disable-next-line react/jsx-curly-newline
+          }
+        />
+      </ThemeProvider>
+    </View>
+  );
+};
 
 export default App;
