@@ -37,7 +37,6 @@ const Login: React.FC<Props> = ({ refValues }) => {
       <TextInput
         ref={refValues.passwordRef}
         isSecure
-        autoFocus
         label="Password"
         error={touched?.password && errors?.password}
         value={values?.password}
