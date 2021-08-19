@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import Home from './Home';
 import { hasLocationPermission } from './permission';
 
 const HomeContainer: React.FC = () => {
-  const getLocation = async () => {
+  const [myPosition, setMyPosition] = useState<Geolocation.GeoPosition>();
+
+  const getLocation = useCallback(async () => {
     const hasPermission = await hasLocationPermission();
 
     if (!hasPermission) {
@@ -14,7 +16,7 @@ const HomeContainer: React.FC = () => {
 
     Geolocation.getCurrentPosition(
       (position) => {
-        console.log(position);
+        setMyPosition(position);
       },
       (error) => {
         Alert.alert(`Code ${error.code}`, error.message);
@@ -31,12 +33,13 @@ const HomeContainer: React.FC = () => {
         distanceFilter: 0,
       },
     );
-  };
+  }, [myPosition]);
+
   useEffect(() => {
     getLocation();
   });
 
-  return <Home />;
+  return <Home position={myPosition} />;
 };
 
 export default HomeContainer;

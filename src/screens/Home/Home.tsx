@@ -1,10 +1,28 @@
 import React from 'react';
-import { SceneWrapper, Text } from '../../components';
+import MapView, { Marker } from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
+import { MapWrapper } from './styles';
 
-const Home: React.FC = () => (
-  <SceneWrapper style={{ flexGrow: 1, justifyContent: 'center' }}>
-    <Text color="white">Home</Text>
-  </SceneWrapper>
+type Props = {
+  position?: Geolocation.GeoPosition;
+};
+
+const Home: React.FC<Props> = ({ position }) => (
+  <MapWrapper>
+    <MapView
+      style={{ flex: 1 }}
+      initialRegion={{
+        latitude: position ? position.coords.latitude : 37.78825,
+        longitude: position ? position.coords.longitude : -122.4324,
+        latitudeDelta: 1,
+        longitudeDelta: 1,
+      }}
+    >
+      {position && (
+        <Marker coordinate={position.coords} title="Your real-time location" />
+      )}
+    </MapView>
+  </MapWrapper>
 );
 
 export default Home;
