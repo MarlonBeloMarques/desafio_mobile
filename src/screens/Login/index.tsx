@@ -3,6 +3,7 @@ import { Formik, FormikHelpers } from 'formik';
 import { TextInput } from 'react-native';
 import Login from './Login';
 import { FormValues, initialValues, validationSchema } from './form';
+import { NavigationActions, Routes } from '../../navigation';
 
 const LoginContainer: React.FC = () => {
   const emailRef = useRef<TextInput>();
@@ -18,6 +19,7 @@ const LoginContainer: React.FC = () => {
   ): void => {
     setSubmitting(true);
     try {
+      NavigationActions.navigate(Routes.HOME);
       console.log('on_submit');
     } catch (error) {
       console.log(error);
