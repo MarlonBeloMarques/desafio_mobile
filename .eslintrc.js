@@ -26,7 +26,10 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/jsx-filename-extension': [
+      2,
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    ],
     'no-empty-function': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-empty-function': 'off',
@@ -34,7 +37,6 @@ module.exports = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     'react/display-name': 'off',
-
     'implicit-arrow-linebreak': 'off',
 
     'no-await-in-loop': 'off',

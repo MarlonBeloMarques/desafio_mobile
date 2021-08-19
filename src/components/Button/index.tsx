@@ -25,7 +25,11 @@ const Button: React.FC<Props> = ({
   ...rest
 }) => (
   <Touchable testID={id} color={color} {...rest} onPress={onPress}>
-    <Text color={styleText?.color} variant={styleText?.variant} weight={styleText?.weight}>
+    <Text
+      color={styleText?.color}
+      variant={styleText?.variant}
+      weight={styleText?.weight}
+    >
       {children}
     </Text>
   </Touchable>

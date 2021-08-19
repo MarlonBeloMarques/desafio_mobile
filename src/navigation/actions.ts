@@ -6,10 +6,15 @@ type RouteParams = Record<string, any>;
 
 let navigator: NavigationContainerRef<any>;
 
-export function setTopLevelNavigator(navigatorRef: NavigationContainerRef<any>): void {
+export function setTopLevelNavigator(
+  navigatorRef: NavigationContainerRef<any>,
+): void {
   navigator = navigatorRef;
 }
-export const resetRouteToTop = (routeName: string, params?: Record<string, any>): void => {
+export const resetRouteToTop = (
+  routeName: string,
+  params?: Record<string, any>,
+): void => {
   navigator.dispatch(
     CommonActions.reset({
       index: 0,

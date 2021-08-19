@@ -20,7 +20,10 @@ type Props = {
 
 export const Navigation: React.FC<Props> = ({ setNavigationTop }) => (
   <NavigationContainer ref={setNavigationTop}>
-    <MainStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={Routes.LOGIN}>
+    <MainStack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={Routes.LOGIN}
+    >
       <MainStack.Screen name={Routes.LOGIN} component={LoginScreen} />
     </MainStack.Navigator>
   </NavigationContainer>

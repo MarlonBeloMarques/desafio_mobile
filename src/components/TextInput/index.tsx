@@ -19,7 +19,9 @@ type Props = {
   value: string | undefined;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
 
-  onChangeText: ((text: string, rawText?: string | undefined) => void) | undefined;
+  onChangeText:
+    | ((text: string, rawText?: string | undefined) => void)
+    | undefined;
   onSubmitEditing?:
     | ((e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => void)
     | undefined;
@@ -86,7 +88,11 @@ const TextInput: React.FC<Props> = ({
         value={value}
         style={[
           style,
-          { borderColor: getError() ? getTheme('failure') : getTheme('disabled').main },
+          {
+            borderColor: getError()
+              ? getTheme('failure')
+              : getTheme('disabled').main,
+          },
         ]}
         secureTextEntry={secure}
         autoCapitalize={autoCapitalize}
@@ -100,4 +106,6 @@ const TextInput: React.FC<Props> = ({
   );
 };
 
-export default React.forwardRef((props: Props, ref) => <TextInput {...props} inputRef={ref} />);
+export default React.forwardRef((props: Props, ref) => (
+  <TextInput {...props} inputRef={ref} />
+));

@@ -19,13 +19,7 @@ const Typography: React.FC<Props> = ({
   align = 'center',
   ...rest
 }) => (
-  <Text
-    style={{ fontSize: getTheme(variant).fontSize, lineHeight: getTheme(variant).lineHeight }}
-    align={align}
-    color={color}
-    weight={weight}
-    {...rest}
-  >
+  <Text variant={variant} align={align} color={color} weight={weight} {...rest}>
     {children}
   </Text>
 );
