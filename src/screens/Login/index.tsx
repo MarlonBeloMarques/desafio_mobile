@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Formik, FormikHelpers } from 'formik';
 import { TextInput } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from './Login';
 import { FormValues, initialValues, validationSchema } from './form';
 import { NavigationActions, Routes } from '../../navigation';
@@ -13,12 +14,18 @@ const LoginContainer: React.FC = () => {
     emailRef,
     passwordRef,
   };
-  const onSubmit = (
+  const onSubmit = async (
     values: FormValues,
     { setSubmitting }: FormikHelpers<FormValues>,
-  ): void => {
+  ): Promise<void> => {
     setSubmitting(true);
     try {
+      const userValues = {
+        email: values.email,
+        name: 'marlon',
+      };
+
+      await AsyncStorage.setItem('@userValues', JSON.stringify(userValues));
       NavigationActions.navigate(Routes.HOME);
       console.log('on_submit');
     } catch (error) {

@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Home from './Home';
 import { hasLocationPermission } from './permission';
 import { getDatabasePath, saveUserInDatabase } from './realm';
-import { LocationSchema } from '../../schemas';
 
 const HomeContainer: React.FC = () => {
   const [myPosition, setMyPosition] = useState<Geolocation.GeoPosition>();
@@ -51,18 +51,28 @@ const HomeContainer: React.FC = () => {
     );
   }, [myPosition]);
 
-  const getUser = (position: Geolocation.GeoPosition): void => {
+  const getUserValue = async () => {
+    const userValues = await AsyncStorage.getItem('@userValues');
+
+    if (userValues) {
+      return JSON.parse(userValues) as { email: string; name: string };
+    }
+
+    return { email: '', name: '' };
+  };
+
+  const getUser = async (position: Geolocation.GeoPosition): Promise<void> => {
     try {
       location = {
-        id: 'marlon.belohd@gmail.com',
+        id: (await getUserValue()).email.toLowerCase(),
         altitude: position?.coords.altitude,
         longitude: position?.coords.longitude,
         latitude: position?.coords.latitude,
       };
 
       user = {
-        email: 'marlon.belohd@gmail.com',
-        name: 'marlon',
+        email: (await getUserValue()).email.toLowerCase(),
+        name: (await getUserValue()).name,
         location,
       };
 
