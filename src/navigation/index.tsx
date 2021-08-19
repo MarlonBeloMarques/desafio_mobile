@@ -7,6 +7,7 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { HeaderBackButton } from '@react-navigation/elements';
 import { Platform } from 'react-native';
 import * as NavigationActions from './actions';
 import { HomeScreen, LoginScreen } from '../screens';
@@ -14,6 +15,7 @@ import { Routes } from './routes';
 import { StackParams } from '../../types/navigation';
 import getColors from '../utils/helpers/getColors';
 import getTheme from '../utils/helpers/getTheme';
+import { signOut } from './utils';
 
 const MainStack = createStackNavigator<StackParams>();
 
@@ -30,7 +32,7 @@ export const Navigation: React.FC<Props> = ({ setNavigationTop }) => (
         component={LoginScreen}
       />
       <MainStack.Screen
-        options={{
+        options={({ navigation }) => ({
           title: '',
           headerBackTitleVisible: false,
           headerTransparent: true,
@@ -42,7 +44,15 @@ export const Navigation: React.FC<Props> = ({ setNavigationTop }) => (
             paddingRight:
               Platform.OS === 'ios' ? getTheme('minimumSpacing') : 0,
           },
-        }}
+          headerLeft: (props) => (
+            <HeaderBackButton
+              {...props}
+              onPress={() => {
+                signOut(navigation);
+              }}
+            />
+          ),
+        })}
         name={Routes.HOME}
         component={HomeScreen}
       />

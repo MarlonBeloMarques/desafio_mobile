@@ -25,6 +25,8 @@ target 'ByCodersTest' do
 
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+  pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
+
   target 'ByCodersTestTests' do
     inherit! :complete
     # Pods for testing

@@ -4,7 +4,6 @@ export default class UserSchema {
     primaryKey: 'email',
     properties: {
       email: { type: 'string', indexed: true },
-      name: 'string',
       location: 'Location',
     },
   };

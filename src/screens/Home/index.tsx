@@ -18,7 +18,6 @@ const HomeContainer: React.FC = () => {
 
   let user: User = {
     email: '',
-    name: '',
     location,
   };
 
@@ -55,10 +54,10 @@ const HomeContainer: React.FC = () => {
     const userValues = await AsyncStorage.getItem('@userValues');
 
     if (userValues) {
-      return JSON.parse(userValues) as { email: string; name: string };
+      return JSON.parse(userValues) as User;
     }
 
-    return { email: '', name: '' };
+    return { email: '' };
   };
 
   const getUser = async (position: Geolocation.GeoPosition): Promise<void> => {
@@ -72,7 +71,6 @@ const HomeContainer: React.FC = () => {
 
       user = {
         email: (await getUserValue()).email.toLowerCase(),
-        name: (await getUserValue()).name,
         location,
       };
 

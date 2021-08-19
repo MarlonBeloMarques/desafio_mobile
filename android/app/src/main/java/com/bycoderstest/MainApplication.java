@@ -2,8 +2,11 @@ package com.bycoderstest;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
@@ -41,6 +44,10 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
           return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNFusedLocationPackage(),
+            new MapsPackage(),
+            new ReactNativeFirebaseAuthPackage(),
+            new RealmReactPackage(),
             new SafeAreaContextPackage(),
             new RNGestureHandlerPackage(),
             new ReactNativeFirebaseAppPackage(),

@@ -31,7 +31,7 @@ const App: React.FC = () => {
   return (
     <View style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar barStyle="light-content" translucent />
         <Navigation
           setNavigationTop={
             (navigatorRef: NavigationContainerRef<any>) =>

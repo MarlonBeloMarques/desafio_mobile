@@ -1,6 +1,5 @@
 import React from 'react';
 import { colors, typography } from '../../themes';
-import getTheme from '../../utils/helpers/getTheme';
 import { Text, fontWeight as weights } from './styles';
 
 type Props = {

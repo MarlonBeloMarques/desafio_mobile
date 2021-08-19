@@ -6,7 +6,6 @@ declare type Location = {
 };
 
 declare type User = {
-  name: string;
   email: string;
   location: Location;
 };

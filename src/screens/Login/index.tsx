@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Formik, FormikHelpers } from 'formik';
 import { TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import Login from './Login';
 import { FormValues, initialValues, validationSchema } from './form';
 import { NavigationActions, Routes } from '../../navigation';
@@ -14,20 +15,35 @@ const LoginContainer: React.FC = () => {
     emailRef,
     passwordRef,
   };
+
+  const signInFirebase = async (
+    email: string,
+    password: string,
+  ): Promise<FirebaseAuthTypes.User> => {
+    try {
+      const { user } = await auth().createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      return user;
+    } catch (error) {
+      console.log(error);
+      throw new Error();
+    }
+  };
+
   const onSubmit = async (
     values: FormValues,
     { setSubmitting }: FormikHelpers<FormValues>,
   ): Promise<void> => {
     setSubmitting(true);
     try {
-      const userValues = {
-        email: values.email,
-        name: 'marlon',
-      };
+      const user = await signInFirebase(values.email, values.password);
 
-      await AsyncStorage.setItem('@userValues', JSON.stringify(userValues));
+      console.log(user);
+
+      await AsyncStorage.setItem('@userValues', JSON.stringify(user));
       NavigationActions.navigate(Routes.HOME);
-      console.log('on_submit');
     } catch (error) {
       console.log(error);
     } finally {

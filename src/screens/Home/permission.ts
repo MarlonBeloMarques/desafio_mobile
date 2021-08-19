@@ -37,7 +37,7 @@ const hasPermissionIOS = async () => {
   return false;
 };
 
-export const hasLocationPermission = async () => {
+export const hasLocationPermission = async (): Promise<boolean> => {
   if (Platform.OS === 'ios') {
     const hasPermission = await hasPermissionIOS();
     return hasPermission;
