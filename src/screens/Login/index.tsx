@@ -3,9 +3,11 @@ import { Formik, FormikHelpers } from 'formik';
 import { TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import crashlytics from '@react-native-firebase/crashlytics';
 import Login from './Login';
 import { FormValues, initialValues, validationSchema } from './form';
 import { NavigationActions, Routes } from '../../navigation';
+import { sendUserLoginEvent } from '../../utils/helpers/sendEvent';
 
 const LoginContainer: React.FC = () => {
   const emailRef = useRef<TextInput>();
@@ -28,7 +30,8 @@ const LoginContainer: React.FC = () => {
       return user;
     } catch (error) {
       console.log(error);
-      throw new Error();
+      crashlytics().recordError(error);
+      throw new Error(error);
     }
   };
 
@@ -40,7 +43,9 @@ const LoginContainer: React.FC = () => {
     try {
       const user = await signInFirebase(values.email, values.password);
 
-      console.log(user);
+      if (user) {
+        await sendUserLoginEvent(user);
+      }
 
       await AsyncStorage.setItem('@userValues', JSON.stringify(user));
       NavigationActions.navigate(Routes.HOME);

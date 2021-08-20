@@ -2,6 +2,8 @@ jest.mock('@react-native-firebase/crashlytics', () => () => ({
   log: jest.fn(),
 }));
 
+jest.mock('@react-native-firebase/analytics', () => () => ({}));
+
 jest.mock('@react-native-firebase/auth', () => () => ({
   onAuthStateChanged: jest.fn(),
 }));

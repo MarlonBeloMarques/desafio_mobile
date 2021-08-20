@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import crashlytics from '@react-native-firebase/crashlytics';
 import Home from './Home';
 import { hasLocationPermission } from './permission';
 import { getDatabasePath, saveUserInDatabase } from './realm';
+import { sendRenderedMapEvent } from '../../utils/helpers/sendEvent';
 
 const HomeContainer: React.FC = () => {
   const [myPosition, setMyPosition] = useState<Geolocation.GeoPosition>();
@@ -22,32 +24,36 @@ const HomeContainer: React.FC = () => {
   };
 
   const getLocation = useCallback(async () => {
-    const hasPermission = await hasLocationPermission();
+    try {
+      const hasPermission = await hasLocationPermission();
 
-    if (!hasPermission) {
-      return;
-    }
+      if (!hasPermission) {
+        return;
+      }
 
-    Geolocation.getCurrentPosition(
-      (position) => {
-        setMyPosition(position);
-        getUser(position);
-      },
-      (error) => {
-        Alert.alert(`Code ${error.code}`, error.message);
-        console.log(error);
-      },
-      {
-        accuracy: {
-          android: 'high',
-          ios: 'best',
+      Geolocation.getCurrentPosition(
+        (position) => {
+          setMyPosition(position);
+          getUser(position);
         },
-        enableHighAccuracy: true,
-        timeout: 60000,
-        maximumAge: 540000,
-        distanceFilter: 0,
-      },
-    );
+        (error) => {
+          Alert.alert(`Code ${error.code}`, error.message);
+          console.log(error);
+        },
+        {
+          accuracy: {
+            android: 'high',
+            ios: 'best',
+          },
+          enableHighAccuracy: true,
+          timeout: 60000,
+          maximumAge: 540000,
+          distanceFilter: 0,
+        },
+      );
+    } catch (error) {
+      crashlytics().recordError(error);
+    }
   }, [myPosition]);
 
   const getUserValue = async () => {
@@ -88,6 +94,15 @@ const HomeContainer: React.FC = () => {
     };
 
     consoleDatabasePath();
+
+    setTimeout(() => {
+      if (myPosition) {
+        sendRenderedMapEvent('Home', {
+          latitude: myPosition.coords.latitude,
+          longitude: myPosition.coords.longitude,
+        });
+      }
+    }, 1000);
   }, []);
 
   useEffect(() => {
