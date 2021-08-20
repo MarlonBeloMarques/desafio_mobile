@@ -1,5 +1,7 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 import { colors, typography } from '../../themes';
+import getTheme from '../../utils/helpers/getTheme';
 import Text from '../Text';
 import { fontWeight } from '../Text/styles';
 import { Touchable } from './styles';
@@ -14,6 +16,7 @@ type Props = {
   children: React.ReactNode;
   id?: string;
   onPress: () => void;
+  submiting?: boolean;
 };
 
 const Button: React.FC<Props> = ({
@@ -22,16 +25,21 @@ const Button: React.FC<Props> = ({
   styleText,
   color = 'primary',
   children,
+  submiting = false,
   ...rest
 }) => (
   <Touchable testID={id} color={color} {...rest} onPress={onPress}>
-    <Text
-      color={styleText?.color}
-      variant={styleText?.variant}
-      weight={styleText?.weight}
-    >
-      {children}
-    </Text>
+    {submiting ? (
+      <ActivityIndicator size="small" color={getTheme('white')} />
+    ) : (
+      <Text
+        color={styleText?.color}
+        variant={styleText?.variant}
+        weight={styleText?.weight}
+      >
+        {children}
+      </Text>
+    )}
   </Touchable>
 );
 

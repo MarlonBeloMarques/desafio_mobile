@@ -13,6 +13,7 @@ type Props = {
 };
 const Login: React.FC<Props> = ({ refValues }) => {
   const {
+    isSubmitting,
     submitForm,
     values,
     errors,
@@ -26,7 +27,7 @@ const Login: React.FC<Props> = ({ refValues }) => {
       <TextInput
         autoFocus
         ref={refValues.emailRef}
-        label="E-mail"
+        label={touched?.email && errors?.email ? errors?.email : 'E-mail'}
         keyboardType="email-address"
         error={touched?.email && errors?.email}
         value={values?.email}
@@ -37,14 +38,18 @@ const Login: React.FC<Props> = ({ refValues }) => {
       <TextInput
         ref={refValues.passwordRef}
         isSecure
-        label="Password"
+        label={
+          touched?.password && errors?.password ? errors?.password : 'Password'
+        }
         error={touched?.password && errors?.password}
         value={values?.password}
         placeholder="Your password"
         onChangeText={handleChange('password')}
         onSubmitEditing={submitForm}
       />
-      <LoginButton onPress={() => submitForm()}>Login</LoginButton>
+      <LoginButton submiting={isSubmitting} onPress={() => submitForm()}>
+        Login
+      </LoginButton>
     </SceneWrapper>
   );
 };
