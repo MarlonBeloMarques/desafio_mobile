@@ -29,7 +29,17 @@ const LoginContainer: React.FC = () => {
       );
       return user;
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        if (error.message.includes('auth/email-already-in-use')) {
+          const { user } = await auth().signInWithEmailAndPassword(
+            email,
+            password,
+          );
+
+          return user;
+        }
+      }
+
       crashlytics().recordError(error);
       throw new Error(error);
     }
