@@ -10,6 +10,7 @@ type Props = {
 const Home: React.FC<Props> = ({ position }) => (
   <MapWrapper>
     <MapView
+      testID="mapView"
       style={{ flex: 1 }}
       initialRegion={{
         latitude: position ? position.coords.latitude : 37.78825,

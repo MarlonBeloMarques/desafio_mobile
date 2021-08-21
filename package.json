@@ -108,7 +108,7 @@
       "./__mocks__/react-native-firebase.ts",
       "./__mocks__/react-native-vector-icons.ts",
       "./__mocks__/react-native-geolocation-service/index.ts",
-      "./__mocks__/react-native-maps.ts",
+      "./__mocks__/react-native-maps.tsx",
       "./__mocks__/react-native-animated.ts",
       "./__mocks__/formik.ts",
       "./node_modules/react-native-gesture-handler/jestSetup.js"
