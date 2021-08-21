@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import { TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
@@ -45,25 +45,15 @@ const LoginContainer: React.FC = () => {
     }
   };
 
-  const onSubmit = async (
-    values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>,
-  ): Promise<void> => {
-    setSubmitting(true);
-    try {
-      const user = await signInFirebase(values.email, values.password);
+  const onSubmit = async (values: FormValues): Promise<void> => {
+    const user = await signInFirebase(values.email, values.password);
 
-      if (user) {
-        await sendUserLoginEvent(user);
-      }
-
-      await AsyncStorage.setItem('@userValues', JSON.stringify(user));
-      NavigationActions.navigate(Routes.HOME);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setSubmitting(false);
+    if (user) {
+      await sendUserLoginEvent(user);
     }
+
+    await AsyncStorage.setItem('@userValues', JSON.stringify(user));
+    NavigationActions.navigate(Routes.HOME);
   };
   return (
     <Formik

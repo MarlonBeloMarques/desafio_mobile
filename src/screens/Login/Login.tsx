@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextInput as TextInputRef } from 'react-native';
 import { FormikProps, useFormikContext } from 'formik';
 import { SceneWrapper, TextInput } from '../../components';
@@ -13,18 +13,30 @@ type Props = {
 };
 const Login: React.FC<Props> = ({ refValues }) => {
   const {
-    isSubmitting,
     submitForm,
     values,
     errors,
     touched,
     handleChange,
   }: FormikProps<FormValues> = useFormikContext();
+  const [isSubmitting, setSubmitting] = useState(false);
+  const handleSubmit = async () => {
+    setSubmitting(true);
+
+    try {
+      await submitForm();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <SceneWrapper style={{ flexGrow: 1, justifyContent: 'center' }}>
       <Title>ByCoders Test</Title>
       <TextInput
+        id="emailInput"
         autoFocus
         ref={refValues.emailRef}
         label={touched?.email && errors?.email ? errors?.email : 'E-mail'}
@@ -36,6 +48,7 @@ const Login: React.FC<Props> = ({ refValues }) => {
         onSubmitEditing={() => refValues.passwordRef.current?.focus()}
       />
       <TextInput
+        id="passwordInput"
         ref={refValues.passwordRef}
         isSecure
         label={
@@ -47,7 +60,11 @@ const Login: React.FC<Props> = ({ refValues }) => {
         onChangeText={handleChange('password')}
         onSubmitEditing={submitForm}
       />
-      <LoginButton submiting={isSubmitting} onPress={() => submitForm()}>
+      <LoginButton
+        submiting={isSubmitting}
+        id="loginButton"
+        onPress={() => handleSubmit()}
+      >
         Login
       </LoginButton>
     </SceneWrapper>
