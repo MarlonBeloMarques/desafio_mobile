@@ -1,7 +1,12 @@
 # Desafio programação - para vaga desenvolvedor Mobile
+
 Por favor leiam este documento do começo ao fim, com muita atenção.
 O intuito deste teste é avaliar seus conhecimentos técnicos em desenvolvimento mobile.
 Este desafio deve ser feito por você em sua casa. Gaste o tempo que você quiser, porém normalmente você não deve precisar de mais do que algumas horas para finalizar.
+
+# Documentação
+
+Para rodar o projeto em seu ambiente local, siga a [documentação](https://cut-aries-8f4.notion.site/ByCoders-Test-a55d86bdb6944e769bcd7088f53d3081).
 
 # Instruções de entrega do desafio
 
